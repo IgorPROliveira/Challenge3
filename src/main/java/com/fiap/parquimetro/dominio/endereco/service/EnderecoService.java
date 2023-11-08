@@ -7,6 +7,7 @@ import com.fiap.parquimetro.dominio.endereco.dto.response.EnderecoEletrodomestic
 import com.fiap.parquimetro.dominio.endereco.entitie.Endereco;
 import com.fiap.parquimetro.dominio.endereco.repository.IEnderecoRepository;
 import com.fiap.parquimetro.exception.service.DatabaseException;
+import com.fiap.parquimetro.exception.service.ServiceNotFoundedException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.data.domain.Page;
@@ -51,7 +52,7 @@ public class EnderecoService {
             var enderecoSaved = enderecoRepository.save(enderecoEntity);
             return enderecoSaved.ToEnderecoDTO();
         }  catch (EntityNotFoundException e) {
-            throw new Scom.fiap.parquimetro.exception.service.ServiceNotFoundedException("Endereço não encontrado, id: " + id);
+            throw new ServiceNotFoundedException("Endereço não encontrado, id: " + id);
         }
     }
 
